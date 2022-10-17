@@ -1,13 +1,10 @@
 # coding: UTF-8
-from faulthandler import disable
-from turtle import update
 import numpy as np
 import matplotlib.pyplot as plt
 
 import datetime
 import PySimpleGUI as sg
 import functions as fc
-import time
 import threading
 
 #################################################
@@ -54,8 +51,6 @@ while True:
         window['-log'].print(date)
         window['-fft-'].update(disabled=False)
         window['-event-'].update(disabled=False)
-        #fig_ = make_data_fig(make=True)
-        #draw_plot(fig_)
 
     elif event == '-event-':
         threadEventPlt = threading.Thread(target=
@@ -73,8 +68,6 @@ while True:
         del_plot()
 
     elif values['-FILES-'] != '':
-        #print('FilesBrowse')
-        #print(values['-FILES-'].split(';'))
         file_path = values['-FILES-'].split(';')[0]
         window['-run-'].update(disabled=False)
 

@@ -1,9 +1,7 @@
 # coding: UTF-8
 import os
-import sys
 import pandas as pd
 import time
-import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -127,7 +125,6 @@ def fftFunc(data,fs_in):
     #F=np.fft.fft(X,norm="ortho")
     F[(freq>fn)]=0                  #ナイキスト周波数以降をカット
     F[0] = 0
-    #print(np.abs(F))
     F_abs = np.abs(F)
     F_edited = (F_abs - F_abs.min()) / (F_abs.max() - F_abs.min())
 
@@ -177,8 +174,6 @@ def fftPlt(window, eventData, date, methodName, path, save_flg, maxrangeHz, dHz,
     window['-log'].print("Side lobe:", '{:.5f}'.format(side_lobe))
 
     #Plot#########
-    # range_Hz = 3000
-    # dHz = 500
 
     df_fft_data = array2df(freq/1000, F_edited) #kHz
     df_fft = pd.DataFrame(df_fft_data, columns=['Freqency', 'AMP'])
@@ -215,8 +210,6 @@ def eventPlt(window, eventData, dataFrame, methodFlg, date, methodName, path, sa
     now_str = date.strftime("%Y%m%d%H%M%S")
     #Plot#########
     t = np.arange(0.0, len(eventData), 1)
-    # fig = plt.figure()
-    # ax = fig.add_subplot(111)
 
     if methodFlg == 0  or methodFlg == 1 or methodFlg == 2:
         plt.plot(t, eventData)
@@ -238,4 +231,3 @@ def eventPlt(window, eventData, dataFrame, methodFlg, date, methodName, path, sa
         window['-log'].print("Event Save")
     window['-log'].print("Event Done")
     plt.show(block=False)
-    #plt.close()
